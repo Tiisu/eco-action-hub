@@ -9,7 +9,198 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          business_license: string | null
+          company_name: string | null
+          created_at: string | null
+          first_name: string | null
+          id: string
+          is_approved: boolean | null
+          last_name: string | null
+          points: number | null
+          updated_at: string | null
+          user_type: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          business_license?: string | null
+          company_name?: string | null
+          created_at?: string | null
+          first_name?: string | null
+          id: string
+          is_approved?: boolean | null
+          last_name?: string | null
+          points?: number | null
+          updated_at?: string | null
+          user_type?: string
+        }
+        Update: {
+          avatar_url?: string | null
+          business_license?: string | null
+          company_name?: string | null
+          created_at?: string | null
+          first_name?: string | null
+          id?: string
+          is_approved?: boolean | null
+          last_name?: string | null
+          points?: number | null
+          updated_at?: string | null
+          user_type?: string
+        }
+        Relationships: []
+      }
+      rewards: {
+        Row: {
+          available_quantity: number | null
+          category: string | null
+          created_at: string | null
+          description: string | null
+          id: string
+          image_url: string | null
+          name: string
+          points_required: number
+          updated_at: string | null
+        }
+        Insert: {
+          available_quantity?: number | null
+          category?: string | null
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          name: string
+          points_required: number
+          updated_at?: string | null
+        }
+        Update: {
+          available_quantity?: number | null
+          category?: string | null
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          name?: string
+          points_required?: number
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      system_settings: {
+        Row: {
+          created_at: string | null
+          id: string
+          key: string
+          updated_at: string | null
+          value: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          key: string
+          updated_at?: string | null
+          value: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          key?: string
+          updated_at?: string | null
+          value?: string
+        }
+        Relationships: []
+      }
+      user_rewards: {
+        Row: {
+          id: string
+          redeemed_at: string | null
+          reward_id: string
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          redeemed_at?: string | null
+          reward_id: string
+          user_id: string
+        }
+        Update: {
+          id?: string
+          redeemed_at?: string | null
+          reward_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_rewards_reward_id_fkey"
+            columns: ["reward_id"]
+            isOneToOne: false
+            referencedRelation: "rewards"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "user_rewards_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      waste_reports: {
+        Row: {
+          agent_id: string | null
+          created_at: string | null
+          id: string
+          image_url: string | null
+          location: string | null
+          status: string | null
+          updated_at: string | null
+          user_id: string
+          waste_type: string
+          weight: number
+        }
+        Insert: {
+          agent_id?: string | null
+          created_at?: string | null
+          id?: string
+          image_url?: string | null
+          location?: string | null
+          status?: string | null
+          updated_at?: string | null
+          user_id: string
+          waste_type: string
+          weight: number
+        }
+        Update: {
+          agent_id?: string | null
+          created_at?: string | null
+          id?: string
+          image_url?: string | null
+          location?: string | null
+          status?: string | null
+          updated_at?: string | null
+          user_id?: string
+          waste_type?: string
+          weight?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "waste_reports_agent_id_fkey"
+            columns: ["agent_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "waste_reports_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
